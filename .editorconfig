@@ -1,0 +1,10 @@
+root = true
+
+# All files
+[*]
+spelling_languages = en-US,ru-RU
+indent_style = space
+
+# Xml files
+[*.xml]
+indent_size = 2
