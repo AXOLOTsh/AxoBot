@@ -30,8 +30,7 @@ namespace AxoBot.Core {
         public async Task RegisterCommand(BaseCommand command) {
             Console.WriteLine("Register Command: " + command.Name);
 
-            var slash = command.RegisterAsSlash(Client);
-            if (slash != null) await RegisterSlashCommand(command, slash);
+            if (command is ISlashCommand) await RegisterSlashCommand(command as ISlashCommand);
 
             command.Client = Client;
             command.CommandProvider = this;

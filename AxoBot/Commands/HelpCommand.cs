@@ -4,29 +4,19 @@ using Discord.WebSocket;
 using static AxoBot.Commands.CommandResources;
 
 namespace AxoBot.Commands {
-    public partial class CommandResources {
-        public HelpCommandResources HelpCommand { get; set; } = new HelpCommandResources();
-        public static HelpCommandResources GetHelpCommandResources() => instance.HelpCommand;
-        public class HelpCommandResources : BaseCommandResources {
-            public HelpCommandResources() : base("Help", "Provides a list of commands.", InfoCategory) { }
-            public string OtherCategoryName { get; set; } = "Other";
-        }
-    }
+    internal class HelpCommand : BaseCommand, ISlashCommand {
+        public override string Name => "Help";
+        public override string Description => "Provides a list of commands.";
+        public override string Category => "Info";
+        public string UnknownCategoryName { get; private set; } = "Other";
 
-    internal class HelpCommand : BaseCommand {
-        public string OtherCategoryName { get; private set; }
-        public HelpCommand() : base(GetHelpCommandResources()) {
-            var resources = GetHelpCommandResources();
-            OtherCategoryName = resources.OtherCategoryName;
-        }
+        public SlashCommandProperties RegisterAsSlash() => GetDefaultSlashCommandBuilder().Build();
 
-        public override SlashCommandProperties RegisterAsSlash(DiscordSocketClient client) => GetDefaultSlashCommandBuilder().Build();
-
-        public override async Task ExecuteFromSlash(SocketSlashCommand arg) { //TODO Следует проверить
-            var dictionary = new Dictionary<string, List<BaseCommand>>() { { OtherCategoryName, new List<BaseCommand>() } };
+        public async Task ExecuteFromSlash(SocketSlashCommand arg) {
+            var dictionary = new Dictionary<string, List<BaseCommand>>() { { UnknownCategoryName, new List<BaseCommand>() } };
             foreach (var command in CommandProvider.Commands) {
                 if (command.Category == null) {
-                    dictionary[OtherCategoryName].Add(command);
+                    dictionary[UnknownCategoryName].Add(command);
                 }
                 else {
                     var category = command.Category;

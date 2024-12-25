@@ -14,7 +14,7 @@ namespace AxoBot.Discord {
 
             Client.Log += async Task (message) => { Console.WriteLine(message.ToString()); };
             Client.Ready += async Task () => {
-                CommandProvider = CommandProvider.UseCommandProvider(Client, Client.GetGuild(1222025024144412733));
+                CommandProvider = CommandProvider.UseCommandProvider(Client, Client.GetGuild(675651071581880320));
 
                 await CommandProvider.RegisterCommandsAsync([
                     new HelpCommand(),
