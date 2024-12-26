@@ -26,7 +26,6 @@ namespace AxoBot.Core {
             }
             catch { }
 
-            command.CommandType = command.CommandType | CommandType.Slash;
             foreach (var item in GetSlashCommandNames(properties)) {
                 SlashCommands.Add(item, command);
             }

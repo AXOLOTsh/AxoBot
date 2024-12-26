@@ -1,7 +1,6 @@
 ﻿using AxoBot.Core;
 using Discord;
 using Discord.WebSocket;
-using static AxoBot.Commands.CommandResources;
 
 namespace AxoBot.Commands {
     internal class HelpCommand : BaseCommand, ISlashCommand {
@@ -13,7 +12,7 @@ namespace AxoBot.Commands {
         public SlashCommandProperties RegisterAsSlash() => GetDefaultSlashCommandBuilder().Build();
 
         public async Task ExecuteFromSlash(SocketSlashCommand arg) {
-            var dictionary = new Dictionary<string, List<BaseCommand>>() { { UnknownCategoryName, new List<BaseCommand>() } };
+            var dictionary = new Dictionary<string, List<ICommand>>() { { UnknownCategoryName, new List<ICommand>() } };
             foreach (var command in CommandProvider.Commands) {
                 if (command.Category == null) {
                     dictionary[UnknownCategoryName].Add(command);
@@ -21,7 +20,7 @@ namespace AxoBot.Commands {
                 else {
                     var category = command.Category;
                     if (!dictionary.ContainsKey(category))
-                        dictionary.Add(category, new List<BaseCommand>() { command });
+                        dictionary.Add(category, new List<ICommand>() { command });
                     else
                         dictionary[category].Add(command);
                 }

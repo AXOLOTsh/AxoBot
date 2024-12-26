@@ -2,7 +2,6 @@
 using Discord;
 using Discord.WebSocket;
 using System.Drawing;
-using static AxoBot.Commands.CommandResources;
 
 namespace AxoBot.Commands {
     public class ShipCommand : BaseCommand, ISlashCommand {

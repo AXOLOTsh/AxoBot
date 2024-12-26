@@ -3,8 +3,8 @@ using Discord.WebSocket;
 
 namespace AxoBot.Core {
     public partial class CommandProvider {
-        public IReadOnlyList<BaseCommand> Commands => _commands;
-        private List<BaseCommand> _commands = new List<BaseCommand>();
+        public IReadOnlyList<ICommand> Commands => _commands;
+        private List<ICommand> _commands = new List<ICommand>();
 
         public DiscordSocketClient Client { get; private set; }
         public IGuild Guild { get; private set; }
@@ -22,12 +22,12 @@ namespace AxoBot.Core {
             return output;
         }
 
-        public async Task RegisterCommandsAsync(BaseCommand[] commands) {
+        public async Task RegisterCommandsAsync(ICommand[] commands) {
             foreach (var command in commands) {
                 await RegisterCommand(command);
             }
         }
-        public async Task RegisterCommand(BaseCommand command) {
+        public async Task RegisterCommand(ICommand command) {
             Console.WriteLine("Register Command: " + command.Name);
 
             if (command is ISlashCommand) await RegisterSlashCommand(command as ISlashCommand);

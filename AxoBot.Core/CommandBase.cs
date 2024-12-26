@@ -1,12 +1,12 @@
-﻿using Discord;
-using Discord.WebSocket;
+﻿using Discord.WebSocket;
+using System.Text.Json.Serialization;
 
 namespace AxoBot.Core {
-    public enum CommandType { Console, Text, Slash }
     public partial class BaseCommand : ICommand {
+        [JsonIgnore]
         public virtual DiscordSocketClient Client { get; set; }
+        [JsonIgnore]
         public virtual CommandProvider CommandProvider { get; set; }
-        public virtual CommandType CommandType { get; set; }
 
         public virtual string Category { get; private set; }
         public virtual string Name { get; private set; }

@@ -1,16 +1,12 @@
 ﻿using Discord.WebSocket;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace AxoBot.Core {
     public partial interface ICommand {
+        [JsonIgnore]
         public DiscordSocketClient Client { get; set; }
+        [JsonIgnore]
         public CommandProvider CommandProvider { get; set; }
-
-        public CommandType CommandType { get; set; }
 
         public string Category { get; }
         public string Name { get; }

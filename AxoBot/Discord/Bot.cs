@@ -2,11 +2,13 @@
 using AxoBot.Core;
 using Discord;
 using Discord.WebSocket;
+using System.Text.Json;
 
 namespace AxoBot.Discord {
     public class Bot {
         public DiscordSocketClient Client { get; private set; }
         public CommandProvider CommandProvider { get; private set; }
+
         public async Task StartAsync() {
             Client = new DiscordSocketClient();
 
@@ -20,10 +22,9 @@ namespace AxoBot.Discord {
                     new HelpCommand(),
                     new AboutCommand(),
 
-                    new ShipCommand(),
+                    new ShipCommand()
                     ]);
             };
-
             await Client.StartAsync();
         }
 
