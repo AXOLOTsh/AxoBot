@@ -10,4 +10,8 @@
     <PackageReference Include="Discord.Net" Version="3.16.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\lib\AxoLogger\AxoLogger\AxoLogger.csproj" />
+  </ItemGroup>
+
 </Project>

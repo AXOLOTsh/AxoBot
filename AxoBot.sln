@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35506.116 d17.12
+VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxoBot", "AxoBot\AxoBot.csproj", "{8824F627-0EC4-4A37-8AFE-55D4AE006435}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxoBot.Core", "AxoBot.Core\AxoBot.Core.csproj", "{BDCD27DD-706F-47AF-8D5D-7792AA67B3B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxoLogger", "..\..\lib\AxoLogger\AxoLogger\AxoLogger.csproj", "{964A2B2C-FB47-4617-9600-415BED277FAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{BDCD27DD-706F-47AF-8D5D-7792AA67B3B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDCD27DD-706F-47AF-8D5D-7792AA67B3B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDCD27DD-706F-47AF-8D5D-7792AA67B3B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{964A2B2C-FB47-4617-9600-415BED277FAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{964A2B2C-FB47-4617-9600-415BED277FAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{964A2B2C-FB47-4617-9600-415BED277FAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{964A2B2C-FB47-4617-9600-415BED277FAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

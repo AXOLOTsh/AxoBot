@@ -2,26 +2,25 @@
 using Discord;
 using Discord.WebSocket;
 using System.Drawing;
-using static AxoBot.Commands.CommandResources;
 
 namespace AxoBot.Commands {
-    public partial class CommandResources {
-        public ShipCommandResources ShipCommand { get; set; } = new ShipCommandResources();
-        public static ShipCommandResources GetShipCommandResources() => instance.ShipCommand;
-        public class ShipCommandResources : BaseCommandResources {
-            public ShipCommandResources() : base("Ship", "Provides a relationship success ratio.", FunCategoryId) { }
-        }
-    }
-    public class ShipCommand : BaseCommand {
-        public ShipCommand() : base(GetShipCommandResources()) { }
+    public class ShipCommand : BaseCommand, ISlashCommand {
+        public override string Name => "Ship";
+        public override string Description => "Provides a relationship success ratio.";
+        public override string Category => "Fun";
 
-        public override SlashCommandProperties RegisterAsSlash(DiscordSocketClient client) => GetDefaultSlashCommandBuilder()
+
+        public const string EmbedTitleUser1Id = "[\\1]";
+        public const string EmbedTitleUser2Id = "[\\2]";
+
+        public SlashCommandProperties RegisterAsSlash() => GetDefaultSlashCommandBuilder()
             .AddOption("user", ApplicationCommandOptionType.User, "The user you want to ship with.", isRequired: true)
             .Build();
-        public override async Task ExecuteFromSlash(SocketSlashCommand arg) {
-            var guildUser = (SocketGuildUser)arg.Data.Options.First().Value;
+        public async Task ExecuteFromSlash(SocketSlashCommand arg) {
+            var guildUser1 = (SocketGuildUser)arg.User;
+            var guildUser2 = (SocketGuildUser)arg.Data.Options.First().Value;
 
-            await arg.RespondAsync(embed: GetInfoEmbed($"Relationship success ratio:").WithDescription($"{new Random().Next(0, 100)} %").WithImageUrl(await MergeAvatars(arg.User, guildUser)).WithFooter("Work in Progress...").Build(), ephemeral: true);
+            await arg.RespondAsync(embed: GetInfoEmbed($"Relationship success ratio {EmbedTitleUser1Id} with {EmbedTitleUser2Id}:".Replace(EmbedTitleUser1Id, guildUser1.DisplayName).Replace(EmbedTitleUser1Id, guildUser2.DisplayName)).WithDescription($"{new Random().Next(0, 100)} %").WithImageUrl(await MergeAvatars(arg.User, guildUser2)).WithFooter("Work in Progress...").Build(), ephemeral: true);
         }
 
         private readonly HttpClient _httpClient = new HttpClient();

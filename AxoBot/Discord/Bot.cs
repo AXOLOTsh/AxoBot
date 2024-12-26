@@ -2,11 +2,13 @@
 using AxoBot.Core;
 using Discord;
 using Discord.WebSocket;
+using System.Text.Json;
 
 namespace AxoBot.Discord {
     public class Bot {
         public DiscordSocketClient Client { get; private set; }
         public CommandProvider CommandProvider { get; private set; }
+
         public async Task StartAsync() {
             Client = new DiscordSocketClient();
 
@@ -14,16 +16,15 @@ namespace AxoBot.Discord {
 
             Client.Log += async Task (message) => { Console.WriteLine(message.ToString()); };
             Client.Ready += async Task () => {
-                CommandProvider = CommandProvider.UseCommandProvider(Client, Client.GetGuild(1222025024144412733));
+                CommandProvider = CommandProvider.UseCommandProvider(Client, Client.GetGuild(675651071581880320));
 
                 await CommandProvider.RegisterCommandsAsync([
                     new HelpCommand(),
                     new AboutCommand(),
 
-                    new ShipCommand(),
+                    new ShipCommand()
                     ]);
             };
-
             await Client.StartAsync();
         }
 

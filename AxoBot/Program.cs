@@ -1,5 +1,4 @@
-﻿using AxoBot.Commands;
-using AxoBot.Core;
+﻿using AxoBot.Core;
 using AxoBot.Discord;
 
 namespace AxoBot {
@@ -14,7 +13,6 @@ namespace AxoBot {
             Directory.CreateDirectory(TempDirectory);
 
             Resources.Load();
-            CommandResources.Load();
 
             Bot = new Bot();
             await Bot.StartAsync();
@@ -22,7 +20,6 @@ namespace AxoBot {
             await Bot.StopAsync();
 
             Resources.Save();
-            CommandResources.Save();
             //Directory.Delete(TempDirectory, true);
         }
     }

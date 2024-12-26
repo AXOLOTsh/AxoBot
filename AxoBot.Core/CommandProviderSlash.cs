@@ -3,16 +3,21 @@ using Discord.WebSocket;
 
 namespace AxoBot.Core {
     public partial class CommandProvider {
-        private Dictionary<string, BaseCommand> SlashCommands { get; set; } = new Dictionary<string, BaseCommand>();
+        private Dictionary<string, ISlashCommand> SlashCommands { get; set; } = new Dictionary<string, ISlashCommand>();
 
         private async Task ProceedSlashCommand(SocketSlashCommand arg) {
+            Console.WriteLine();
+            Console.WriteLine($"Slash command received. Delay time: {DateTime.Now - arg.CreatedAt}");
+
             var command = arg.Data.Name;
-            BaseCommand executer;
+            ISlashCommand executer;
             SlashCommands.TryGetValue(command, out executer);
             if (executer != null) await executer.ExecuteFromSlash(arg);
+            Console.WriteLine($"Slash command responded. Delay time: {DateTime.Now - arg.CreatedAt}");
         }
 
-        private async Task RegisterSlashCommand(BaseCommand command, SlashCommandProperties properties) {
+        private async Task RegisterSlashCommand(ISlashCommand command) {
+            var properties = command.RegisterAsSlash();
             try {
                 if (Guild != null)
                     await Guild.CreateApplicationCommandAsync(properties);
@@ -21,7 +26,6 @@ namespace AxoBot.Core {
             }
             catch { }
 
-            command.CommandType = command.CommandType | CommandType.Slash;
             foreach (var item in GetSlashCommandNames(properties)) {
                 SlashCommands.Add(item, command);
             }
