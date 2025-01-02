@@ -10,6 +10,9 @@ namespace AxoBot.Discord {
         public CommandProvider CommandProvider { get; private set; }
 
         public async Task StartAsync() {
+            CommandResources.Load();
+            CommandResources.Save();
+
             Client = new DiscordSocketClient();
 
             await Client.LoginAsync(TokenType.Bot, File.ReadAllText("token"));
@@ -18,16 +21,10 @@ namespace AxoBot.Discord {
             Client.Ready += async Task () => {
                 CommandProvider = CommandProvider.UseCommandProvider(Client, Client.GetGuild(675651071581880320));
 
-                await CommandProvider.RegisterCommandsAsync([
-                    new HelpCommand(),
-                    new AboutCommand(),
-
-                    new ShipCommand()
-                    ]);
+                await CommandProvider.RegisterCommandsAsync(CommandResources.GetBotCommands());
             };
             await Client.StartAsync();
         }
-
         public async Task StopAsync() {
             await Client.StopAsync();
             await Client.LogoutAsync();

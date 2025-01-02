@@ -3,7 +3,7 @@ using Discord;
 using Discord.WebSocket;
 
 namespace AxoBot.Commands {
-    internal class HelpCommand : BaseCommand, ISlashCommand {
+    public class HelpCommand : BaseCommand, ISlashCommand {
         public override string Name => "Help";
         public override string Description => "Provides a list of commands.";
         public override string Category => "Info";

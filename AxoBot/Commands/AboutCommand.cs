@@ -4,9 +4,9 @@ using Discord.WebSocket;
 
 namespace AxoBot.Commands {
     public class AboutCommand : BaseCommand, ISlashCommand {
-        public override string Category => "Info";
         public override string Name => "About";
         public override string Description => "Provides information about the bot.";
+        public override string Category => "Info";
 
         public string EmbedTitle => $"AxoBot {Program.Version}";
         public string EmbedDescription => "GitHub: https://github.com/AXOLOTsh/AxoBot";
