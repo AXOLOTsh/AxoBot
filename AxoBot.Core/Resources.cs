@@ -13,7 +13,7 @@ namespace AxoBot.Core {
             else instance = new Resources();
         }
         public static void Save() {
-            File.WriteAllText(file, JsonSerializer.Serialize(instance));
+            File.WriteAllText(file, JsonSerializer.Serialize(instance, new JsonSerializerOptions() { WriteIndented = true }));
         }
 
         public string BotName { get; set; } = "AxoBot";
